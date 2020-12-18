@@ -19,7 +19,22 @@ const Login = (props) => {
     
     const handleSubmit = (e) => {
         e.preventDefault()
-       
+        const userData = { email, password }
+        axios.post(`${REACT_APP_SERVER_URL}/controllers/user/login`, userData)
+        .then(response => {
+            const { token } = response.data;
+            // Save token to local storage
+            localStorage.setItem('jwtToken', token)
+            // Set token to auth header
+            setAuthToken(token);
+            // Decode token to get user data
+            const decoded = jwt_decode(token)
+            // Set current user
+            props.nowCurrentUser(decoded)
+        })
+        .catch(err => {
+            console.log(err)
+        })
     }
 
     if(props.user) return <Redirect to='/profile' />
