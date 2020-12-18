@@ -52,9 +52,11 @@ function App() {
     }
   }
 
+  //<Navbar handleLogout={handleLogout} isAuth={isAuthenticated} />
+
   return (
     <div className="App">
-      /*<Navbar handleLogout={handleLogout} isAuth={isAuthenticated} />*/
+      
       <Welcome />
     </div>
   );
